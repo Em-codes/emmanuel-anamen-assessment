@@ -53,8 +53,7 @@ export default {
   },
 
   methods: {
-    async setPage(page) {
-      this.$store.commit('SET_PAGE', page)
+    async setPage() {
       await this.$store.dispatch("fetchJobs", this.queries);
     }
   },

@@ -18,10 +18,10 @@ const assets = {
             (state.selectedJob = selectedJob),
         SET_KEYWORD: (state, keyword) =>
             (state.queryParam.keyword = keyword),
-        SET_RESULTPERPAGE: (state, keyword) =>
-            (state.queryParam.resultPerPage = keyword),
-        SET_PAGE: (state, keyword) =>
-            (state.queryParam.page = keyword),
+        SET_RESULTPERPAGE: (state, data) =>
+            (state.queryParam.resultPerPage = data),
+        SET_PAGE: (state, page) =>
+            (state.queryParam.page = page),
     },
     actions: {
         fetchJobs: async ({ commit }, queryParams) => {

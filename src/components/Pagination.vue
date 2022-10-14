@@ -6,7 +6,7 @@
           <img src="../assets/images/arrow_right.png" alt="arrow-right">
         </p>
         <button type="button" class="current-page">
-          {{ page }}
+          {{ query.page }}
         </button>
         <p class="page-go-btn" @click="goNext">
           <img src="../assets/images/arrow_left.png" alt="arrow-left">
@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 export default {
   name: "Paginaton",
   props: {
@@ -25,23 +26,29 @@ export default {
   },
   data() {
     return {
-        page: 1
+        currentPage: 1
     }
   },
 
+  computed:{
+   ...mapGetters({
+      query: ['queries']
+   })
+  },
   methods: {
     goPrev() {
-      if (this.items.hasPrevPage) {
-        this.page--;
-        this.items.pagingCounter--
-        this.$emit('setPage',  this.page)
+      if (this.items && this.items.hasPrevPage) {
+        const pg = this.currentPage-1;
+        this.$emit('setPage')
+      this.$store.commit('SET_PAGE', pg)
       }
     },
     goNext() {
-      if (this.items.hasNextPage) {
-        this.page++;
-        this.items.pagingCounter++
-        this.$emit('setPage', this.page)
+      if (this.items && this.items.hasNextPage) {
+        const pg = this.currentPage+1;
+        console.log(pg, 'pg')
+        this.$emit('setPage')
+      this.$store.commit('SET_PAGE', pg)
       }
     },
   },
