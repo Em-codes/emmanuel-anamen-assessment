@@ -6,7 +6,7 @@
           <div class="full-job-read">
             <h1 class="fr-job-title">{{job && job.jobTitle}}</h1>
             <p class="fr-job-description" v-html="job && job.jobDescription"></p>
-            <a :href="job && job.jobUrl"><button class="apply-now">Apply Now!</button></a>
+            <a v-if="!loading && job" :href="job && job.jobUrl"><button  class="apply-now">Apply Now!</button></a>
           </div>
           
        </div>
@@ -30,6 +30,7 @@ export default {
      computed: {
     ...mapGetters({
       job: ["selectedJob"],
+      loading:['loadingState']
     }),
      },
   async created() {
@@ -40,7 +41,7 @@ export default {
 
 <style scoped>
 a { text-decoration: none;}
-.full-job-read { border-top:0.5px solid rgba(183, 183, 183, 0.355); border-radius: 6px; padding: 20px; box-shadow: 0px 134px 193px rgba(183, 183, 183, 0.07), 0px 16.7789px 24.1666px rgba(183, 183, 183, 0.035) }
+.full-job-read { margin-bottom: 40px; border-top:0.5px solid rgba(183, 183, 183, 0.355); border-radius: 6px; padding: 20px; box-shadow: 0px 134px 193px rgba(183, 183, 183, 0.07), 0px 16.7789px 24.1666px rgba(183, 183, 183, 0.035) }
 
 .fr-job-title { color: #fff; padding-bottom: 10px; }
 .fr-job-description { color:hsl(229, 38%, 76%); padding-bottom: 12px; line-height: 24px;}

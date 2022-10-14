@@ -1,10 +1,10 @@
 <template>
   <div class="job-card">
     <h1 class="job-title">{{job.jobTitle}}</h1>
-    <p class="description" v-html="job.jobDescription"></p>
+    <p class="description" v-html="formatDesc(job.jobDescription)"></p>
     <div class="view-more-cta">
         <div>&nbsp;</div>
-        <button class="see-details" @click="$router.push(`/job-details/${job._id}`)">See details &nbsp;>> </button>
+        <button class="see-details" @click="viewJob(job)">See details &nbsp;>> </button>
     </div>
   </div>
 </template>
@@ -14,7 +14,24 @@ export default {
 name:"JobCard",
 props: {
     job: {type: Object, default: () => {}}
-}
+},
+
+methods: {
+  
+  formatDesc(wordStr) {
+    const jobDescText = wordStr?.split(' ');
+    const firstFourty = jobDescText.splice(0, 40).join(' ') + '...'
+
+    return firstFourty
+  },
+
+  viewJob(job) {
+    this.$store.commit('SET_SELECTED_JOB', {})
+    this.$nextTick(() => {
+      this.$router.push(`/job-details/${job._id}`)
+    })
+  }
+ }
 }
 
 </script>
@@ -32,10 +49,10 @@ props: {
 .job-card::before{ border-bottom: 1px solid transparent; border-image: linear-gradient(90deg, rgb(240, 28, 28) 0%, rgba(233, 132, 73, 0.99) 35%, rgb(36, 127, 141) 100%);  border-image-slice: 1; transform: scale(0, 1);}
 
 .job-card .job-title { font-size: 24px; font-weight: 600 !important; padding-bottom: 6px; color: #fff;  }
-.job-card .description { font-size: 16px;  overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; }
+.job-card .description { font-size: 16px; }
 .job-card .view-more-cta { display: flex; align-items: center; justify-content: space-between; padding: 20px 0 8px 0; } 
 .job-card .view-more-cta .see-details { all: unset; z-index: 9; background: hsl(228, 34%, 66%); color: #fff; cursor: pointer; border-radius: 5px; padding:7px 13px; }
-
+.readmore { color: rgb(0, 195, 0); }
 
 
 /* MEDIA QUERIES */

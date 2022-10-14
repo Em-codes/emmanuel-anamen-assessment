@@ -17,7 +17,7 @@
                 <img src="../assets/images/dashboard.png" alt="dashboard">
                 <h6>Dashboard</h6>
               </div>
-              <div class="nav-link">
+              <div class="nav-link active">
                 <img src="../assets/images/dashboard.png" alt="dashboard">
                 <h6>Find Jobs</h6>
               </div>
@@ -59,12 +59,16 @@ data() {
     window.addEventListener('resize', () => {
     window.innerWidth <= 767 ? this.$store.commit('SET_NAVBAR', true) : this.$store.commit('SET_NAVBAR', false)
     })
+
+    if(!this.toggleNavView && window.innerWidth <= 767) {
+      this.$store.commit('SET_NAVBAR', true)
+    }
   }
 }
 </script>
 
 <style scoped>
-.sidebar-wrapper { position: fixed; left: 0; top: 0; background: hsl(228, 28%, 20%); color: #fff; height: 100vh; max-width: 300px; width: 100%; border-top-right-radius: 30px;}
+.sidebar-wrapper { position: fixed; z-index: 9999; left: 0; top: 0; background: hsl(228, 28%, 20%); color: #fff; height: 100vh; max-width: 300px; width: 100%; border-top-right-radius: 30px;}
 .sidebar-wrapper .sidebar { max-width: 200px; width: 100%; margin: 40px auto 0 auto; }
 .sidebar-wrapper .sidebar .logo { text-align: center; }
 .sidebar-wrapper .sidebar .avatar-wrapper { margin: 60px 0 40px 0; }
@@ -72,8 +76,6 @@ data() {
 .sidebar-wrapper .sidebar .avatar-wrapper .avatar-img > img { width: 100%; border-radius: 50%; }
 .sidebar-wrapper .sidebar .avatar-wrapper .view-profile { display: flex; align-items: center; justify-content: center; margin-top: 20px; }
 .sidebar-wrapper .sidebar .avatar-wrapper .view-profile > button { all: unset; padding: 5px 16px; margin: 0 auto; cursor: pointer; border-radius: 10px; background: hsl(228, 34%, 66%); }
-
-
 .sidebar-wrapper .sidebar nav > a { text-decoration: none; }
 .sidebar-wrapper .sidebar nav .nav-link { display: flex; align-items: center; padding: 5px 16px; margin: 0 auto; cursor: pointer; border-radius: 10px; margin-bottom: 20px;}
 .sidebar-wrapper .sidebar nav .nav-link:hover { background: hsl(228, 34%, 66%);  }
@@ -81,9 +83,6 @@ data() {
 .sidebar-wrapper .sidebar nav .nav-link > h6 { color: #fff; font-size: 16px; font-family: 'Source Sans Pro', sans-serif;}
 
 .mobile-display {display: none}
+.active { background: hsl(228, 34%, 66%)  !important; }
 
-  /* MEDIA QUERIES */
-  /* @media (max-width: 767px) {
-    .sidebar-wrapper { display: none;}
-  } */
 </style>

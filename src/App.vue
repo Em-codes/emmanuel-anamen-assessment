@@ -1,25 +1,29 @@
 <template>
   <div id="app">
+        <linear-loader v-if="loading"/>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
+import LinearLoader from './components/LinearLoader.vue'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'App',
   components: {
-  }
+    LinearLoader
+  },
+
+   computed: {
+    ...mapGetters({
+      loading: ["loadingState"],
+    })
+   }
+  
 }
 </script>
 
 <style>
-/* #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-} */
+
 </style>
